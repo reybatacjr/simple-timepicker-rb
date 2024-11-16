@@ -39,7 +39,7 @@ To use the TimepickerRB plugin, simply include the script and CSS in your projec
 To initialize the timepicker on an input element:
 
 ```javascript
-$('#your-input').TimepickerRB({
+$('#your-input').SimpleTimepickerRB({
     type: 24,   // 24-hour format, or 12 for 12-hour format
     value: '12:00',  // default time
     minuteIncrement: 5  // increment in minutes (e.g., 5, 10, etc.)
