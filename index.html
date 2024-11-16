@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Replace Input with Span</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="simple-timepicker-rb.min.js"></script>
+</head>
+<body>
+  <label>MyTime: </label>
+  <input type="text" class="test" id="example" style="width: 80px; height: 30px;" >
+  <input type="text" class="test" id="example2" style="width: 80px; height: 30px;" >
+
+</body>
+<footer>
+    <script>
+       $('#example').SimpleTimepickerRB({
+        type: 24,
+        value: '08:00',
+        minuteIncrement: 30
+       });
+       $('#example2').SimpleTimepickerRB({
+        type: 12,
+        value: '08:00',
+        minuteIncrement: 5
+       });
+    </script>
+</footer>
+</html>
