@@ -12,26 +12,24 @@ A lightweight and customizable timepicker plugin for jQuery that allows users to
 
 ## Installation
 
-To use the TimepickerRB plugin, simply include the script and CSS in your project:
+To use the TimepickerRB plugin, simply include the script in your project:
 
 1. Download or clone the repository.
 
-2. Include the **TimepickerRB** script in your HTML:
+2. Include the **SimpleTimepickerRB** script in your HTML:
 
     ```html
-    <script src="path/to/timepicker.js"></script>
+    <script src="path/to/simple-timepicker-rb.js"></script>
+
+OR
+    
+    <script src="path/to/simple-timepicker-rb.min.js"></script>
     ```
 
 3. Include jQuery before the **TimepickerRB** script:
 
     ```html
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    ```
-
-4. Add the **TimepickerRB** CSS (if available in the repo):
-
-    ```html
-    <link rel="stylesheet" href="path/to/timepicker.css">
     ```
 
 ## Usage
