@@ -20,9 +20,9 @@ To use the TimepickerRB plugin, simply include the script in your project:
 
     ```html
     <script src="path/to/simple-timepicker-rb.js"></script>
-
-OR
-    
+    ```
+   OR
+    ```html
     <script src="path/to/simple-timepicker-rb.min.js"></script>
     ```
 
