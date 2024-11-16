@@ -26,7 +26,7 @@ To use the TimepickerRB plugin, simply include the script in your project:
     <script src="path/to/simple-timepicker-rb.min.js"></script>
     ```
 
-3. Include jQuery before the **TimepickerRB** script:
+3. Include jQuery before the **SimpleTimepickerRB** script:
 
     ```html
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
