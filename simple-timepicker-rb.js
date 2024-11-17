@@ -119,25 +119,10 @@
             inputElement.appendTo(timepicker_content);
             timeDisplay.appendTo(timepicker_content);  // Append time display to the content
 
-            // Add styling for the wrapper and content
+            // Apply input dimention for the wrapper and content
             timepicker_wrapper.css({
-                'padding': '3px',
-                'border': '1px solid #ccc',  // Grey border
-                'border-radius': '8px',     // Rounded corners (5px radius)
-                'display': 'inline-flex',
-                'align-items': 'center',
-                'background-color': '#f9f9f9',
-                'position': 'relative',      // For positioning the clear button
-                'font-family': 'Arial, sans-serif',
                 'width': inputWidth + 'px',  // Set the width to match the input
                 'height': inputHeight + 'px' // Set the height to match the input
-            });
-
-            timepicker_content.css({
-                'flex-grow': 1,               // Allow the content to expand
-                'padding-left': '5px',
-                'font-size': '14px',          // Keep consistent font size
-                'line-height': '20px'         // Keep content vertically centered
             });
 
             var valueToUse = settings.value || inputElement.val();
@@ -154,26 +139,8 @@
                 timeDisplay.text('Invalid Time'); // Display an error message if time is invalid
             }
 
-            var clearButton = $('<button></button>')
+            var clearButton = $('<button class="clear-button"></button>')
                 .text('X')
-                .css({
-                    'position': 'absolute',
-                    'right': '5px',
-                    'top': '50%',
-                    'transform': 'translateY(-50%)',
-                    'cursor': 'pointer',
-                    'width': '20px',
-                    'height': '20px',
-                    'border': 'none',
-                    'border-radius': '5px',
-                    'background-color': '#f1f1f1',
-                    'color': '#888',
-                    'font-size': '14px',
-                    'display': 'flex',
-                    'justify-content': 'center',
-                    'align-items': 'center',
-                    'text-align': 'center'
-                })
                 .on('click', function() {
                     if(settings.type === 12) {
                         timeDisplay.text('00:00 AM');  // Set value to '00:00'
@@ -187,76 +154,32 @@
             timepicker_wrapper.append(clearButton);
 
             // Increase buttons for hour and minute
-            var increaseHour = $('<button>↑</button>')  // Increase hour button
-                .css({
-                    'cursor': 'pointer',
-                    'font-size': '18px',
-                    'border': 'none',
-                    'background-color': '#f1f1f1',
-                    'flex': '1',
-                    'padding': '5px',
-                    'text-align': 'center'
-                })
+            var increaseHour = $('<button class="spinner-btn"></button>')
+                .text('↑')  // Increase hour button
                 .on('click', function() {
                     var currentTime = hourInput.val() + ":" + minuteInput.val();
                     hourInput.val( adjustTime(currentTime, 1, "hour", "add", settings.type) );
                 });
 
-            var increaseMinute = $('<button>↑</button>')  // Increase minute button
-                .css({
-                    'cursor': 'pointer',
-                    'font-size': '18px',
-                    'border': 'none',
-                    'background-color': '#f1f1f1',
-                    'flex': '1',
-                    'padding': '5px',
-                    'text-align': 'center',
-                    'margin-left': '17px',
-                    'margin-right': '17px'
-                })
+            var increaseMinute = $('<button class="spinner-btn spinner-btn-left"></button>')  // Increase minute button
+                .text('↑')  // Increase hour button
                 .on('click', function() {
                     var currentTime = hourInput.val() + ":" + minuteInput.val();
                     minuteInput.val( adjustTime(currentTime, settings.minuteIncrement, "minute", "add", settings.type) );
                 });
 
             // Hour and minute input (both text)
-            var hourInput = $('<input type="text" placeholder="Hour" />')
-                .val(valueToUse.split(':')[0])
-                .css({
-                    'width': '26%',
-                    'padding': '5px',
-                    'border': '1px solid #ccc',
-                    'border-radius': '4px',
-                    'font-size': '24px',
-                });
+            var hourInput = $('<input class="time-digit" type="text" placeholder="Hour" />')
+                .val(valueToUse.split(':')[0]);
 
-            var separator = $('<span>:</span>')
-                .css({
-                    'font-size': '24px'
-                });
+            var separator = $('<span>:</span>');
 
-            var minuteInput = $('<input type="text" placeholder="Minute" />')
-                .css({
-                    'width': '26%',
-                    'padding': '5px',
-                    'border': '1px solid #ccc',
-                    'border-radius': '4px',
-                    'font-size': '24px',
-                });
+            var minuteInput = $('<input class="time-digit" type="text" placeholder="Minute" />');
 
             minuteInput.val(settings.type === 12 ? valueToUse.split(':')[1].split(' ')[0] : valueToUse.split(':')[1]);
 
             // Add the AM/PM toggle button
-            var amPmToggle = $('<span></span>')
-                .css({
-                    'font-size': '18px',
-                    'border': 'none',
-                    'background-color': '#f1f1f1',
-                    'cursor': 'pointer',
-                    'text-align': 'center',
-                    'border-radius': '4px',
-                    'font-size': '10px'
-                })
+            var amPmToggle = $('<span class="ampm-toggle"></span>')
                 .on('click', function() {
                     // Toggle AM/PM state
                     var currentVal = timeDisplay.text();
@@ -274,51 +197,22 @@
             }
 
             // Decrease buttons for hour and minute
-            var decreaseHour = $('<button>↓</button>')  // Decrease hour button
-                .css({
-                    'cursor': 'pointer',
-                    'font-size': '18px',
-                    'border': 'none',
-                    'background-color': '#f1f1f1',
-                    'flex': '1',
-                    'padding': '5px',
-                    'text-align': 'center'
-                })
+            var decreaseHour = $('<button class="spinner-btn"></button>')  // Decrease hour button
+                .text('↓')
                 .on('click', function() {
                     var currentTime = hourInput.val() + ":" + minuteInput.val();
                     hourInput.val( adjustTime(currentTime, 1, "hour", "subtract", settings.type) );
                 });
 
-            var decreaseMinute = $('<button>↓</button>')  // Decrease minute button
-                .css({
-                    'cursor': 'pointer',
-                    'font-size': '18px',
-                    'border': 'none',
-                    'background-color': '#f1f1f1',
-                    'flex': '1',
-                    'padding': '5px',
-                    'text-align': 'center',
-                    'margin-left': '17px',
-                    'margin-right': '17px'
-                })
+            var decreaseMinute = $('<button class="spinner-btn spinner-btn-left"></button>')  // Decrease minute button
+                .text('↓')
                 .on('click', function() {
                     var currentTime = hourInput.val() + ":" + minuteInput.val();
                     minuteInput.val( adjustTime(currentTime, settings.minuteIncrement, "minute", "subtract", settings.type) );
                 });
 
             // OK Button to save time
-            var okButton = $('<button>OK</button>') 
-                .css({
-                    'width': '100%',
-                    'padding': '8px',
-                    'background-color': '#4CAF50',
-                    'color': '#fff',
-                    'border': 'none',
-                    'border-radius': '4px',
-                    'cursor': 'pointer',
-                    'font-size': '14px',
-                    'margin-top': '10px'
-                })
+            var okButton = $('<button class="ok-btn">OK</button>') 
                 .on('click', function() {
                     var hour = hourInput.val();
                     var minute = minuteInput.val();
@@ -335,52 +229,24 @@
             // Create the popup elements for hour and minute inputs with "OK" button
             var popup = $('<div class="timepicker-popup"></div>')
                 .css({
-                    'display': 'none',  // Start hidden
-                    'position': 'absolute',
                     'top': inputHeight + 8 + 'px', // Position below the input
-                    'left': '0',
-                    'width': '120px',
-                    'padding': '5px',
-                    'background-color': '#fff',
-                    'border': '1px solid #ccc',
-                    'border-radius': '8px',
-                    'box-shadow': '0 2px 10px rgba(0, 0, 0, 0.1)',
-                    'font-size': '14px',
-                    'z-index': '999'
                 });
 
             // Arrange the elements in a row layout for increase hour and increase minute
             popup.append(
                 $('<div class="increase-wrapper">')
-                    .css({
-                        'display': 'flex', 
-                        'flex-direction': 'row',  
-                        'align-items': 'center',  
-                        'gap': '5px'  
-                    })
                     .append(increaseHour, increaseMinute)
             );
 
             // Arrange the elements in a flex layout to position buttons
             popup.append(
                 $('<div class="time-wrapper">')
-                    .css({
-                        'display': 'flex',
-                        'align-items': 'center',
-                        'gap': '5px'
-                    })
                     .append(hourInput, separator, minuteInput, amPmToggle) // Add AM/PM toggle here
             );
 
             // Row with decrease buttons
             popup.append(
                 $('<div class="decrease-wrapper">')
-                    .css({
-                        'display': 'flex',
-                        'flex-direction': 'row',
-                        'align-items': 'center',
-                        'gap': '5px'
-                    })
                     .append(decreaseHour, decreaseMinute)
             );
 
