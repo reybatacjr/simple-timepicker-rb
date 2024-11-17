@@ -147,6 +147,12 @@
                     } else {
                         timeDisplay.text('00:00');  // Set value to '00:00'
                     }
+                    inputElement.val(timeDisplay.text());
+                    hourInput.val(inputElement.val().split(':')[0]);
+                    minuteInput.val(settings.type === 12 ? inputElement.val().split(':')[1].split(' ')[0] : inputElement.val().split(':')[1]);
+                    if(settings.type === 12) {
+                        amPmToggle.text(inputElement.val().split(':')[1].split(' ')[1]);
+                    }
                 });
 
             // Append the timepicker content and clear button to the wrapper
@@ -174,22 +180,15 @@
 
             var separator = $('<span>:</span>');
 
-            var minuteInput = $('<input class="time-digit" type="text" placeholder="Minute" />');
-
-            minuteInput.val(settings.type === 12 ? valueToUse.split(':')[1].split(' ')[0] : valueToUse.split(':')[1]);
+            var minuteInput = $('<input class="time-digit" type="text" placeholder="Minute" />')
+                .val(settings.type === 12 ? valueToUse.split(':')[1].split(' ')[0] : valueToUse.split(':')[1]);
 
             // Add the AM/PM toggle button
             var amPmToggle = $('<span class="ampm-toggle"></span>')
                 .on('click', function() {
                     // Toggle AM/PM state
                     var currentVal = timeDisplay.text();
-                    if (currentVal.includes('AM')) {
-                        timeDisplay.text(currentVal.replace('AM', 'PM'));
-                        amPmToggle.text(timeDisplay.text().split(' ')[1]);
-                    } else {
-                        timeDisplay.text(currentVal.replace('PM', 'AM'));
-                        amPmToggle.text(timeDisplay.text().split(' ')[1]);
-                    }
+                    amPmToggle.text(amPmToggle.text() === 'AM' ? 'PM' : 'AM');
                 });
 
             if(settings.type === 12) {
@@ -257,6 +256,7 @@
             timepicker_content.on('click', function() {
                 // Hide any other open popups first
                 $('.timepicker-popup').not(popup).hide();
+
                 popup.toggle();  // Toggle visibility of the popup
             });
 
