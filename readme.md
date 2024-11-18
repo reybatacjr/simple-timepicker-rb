@@ -42,6 +42,8 @@ $('#your-input').SimpleTimepickerRB({
     value: '12:00',  // default time
     minuteIncrement: 5  // increment in minutes (e.g., 5, 10, etc.)
 });
+
+$('#your-input').SetValue('08:00');
 ```
 
 ## Options
