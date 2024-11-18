@@ -8,25 +8,31 @@
   <link rel="stylesheet" href="simple-timepicker-rb.min.css" />
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="simple-timepicker-rb.min.js"></script>
+  <script src="simple-timepicker-rb.js"></script>
 </head>
 <body>
-  <label>MyTime: </label>
-  <input type="text" class="test" id="example" style="width: 80px; height: 30px;" >
-  <input type="text" class="test" id="example2" style="width: 80px; height: 30px;" >
-
+  <label>MyTime: <input type="text" class="test" id="example" style="width: 80px; height: 30px;" /></label>
+  
+  <br/>
+  <label>Enter time: <input type="text" id="new-time" value="09:00 AM" /></label>
+  <button id="set-time-btn">Set Time</button>
+  <button id="get-time-btn">Get Time</button>
 </body>
 <footer>
     <script>
        $('#example').SimpleTimepickerRB({
-        type: 24,
-        value: '08:00',
-        minuteIncrement: 30
-       });
-       $('#example2').SimpleTimepickerRB({
         type: 12,
         value: '08:00 AM',
-        minuteIncrement: 5
+        minuteIncrement: 30
+       });
+
+       $('#set-time-btn').on('click', function() {
+        $('#example').SetValue($('#new-time').val());
+        alert('New time is set');
+       });
+
+       $('#get-time-btn').on('click', function() {
+        alert($('#example').val());
        });
     </script>
 </footer>

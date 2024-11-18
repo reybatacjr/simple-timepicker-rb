@@ -23,7 +23,8 @@
 
         // Private function to convert 24-hour time to 12-hour time format and add AM/PM
         function convertTo12HourFormat(time) {
-            const [hours, minutes] = time.split(':');
+            const hours = time.split(':')[0];
+            const minutes = time.split(':')[1].split(' ')[0];
             let hour = parseInt(hours, 10);
             let suffix = 'AM';
             
@@ -221,7 +222,7 @@
                         // time = convertTo12HourFormat(time);
                     }
                     timeDisplay.text(time);
-                    inputElement.attr('value', time);
+                    inputElement.val(time);
                     popup.hide(); // Hide the popup after saving the time
                 });
 
@@ -256,6 +257,13 @@
             timepicker_content.on('click', function() {
                 // Hide any other open popups first
                 $('.timepicker-popup').not(popup).hide();
+                alert('');
+                var valueToUse = timeDisplay.text();
+                hourInput.val(valueToUse.split(':')[0])
+                minuteInput.val(valueToUse.split(':')[1].split(' ')[0]);
+                if (settings.type == 12) {
+                    amPmToggle.text(valueToUse.split(':')[1].split(' ')[1]);
+                }
 
                 popup.toggle();  // Toggle visibility of the popup
             });
@@ -269,6 +277,23 @@
                 'display': 'none'
             });
             inputContainer.append(timepicker_wrapper);
+
+            inputElement.on('change', function () {
+                if(settings.type===12) {
+                    inputElement.val(convertTo12HourFormat(inputElement.val()));
+                }
+                timeDisplay.text(inputElement.val());
+            });
+        });
+    };
+
+    $.fn.SetValue = function (value) {
+        return this.each(function () {
+            var inputElement = $(this);
+
+            inputElement.val(value);
+            //inputElement.siblings('.time-display').text(value);
+            inputElement.trigger('change');
         });
     };
 })(jQuery);
